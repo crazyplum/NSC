@@ -1,6 +1,7 @@
 package com.plum.mthighlight.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -16,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.plum.mthighlight.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -71,6 +74,7 @@ public class FirstStageActivity extends ActionBarActivity {
         LinearLayout row2;
         LinearLayout row3;
         LinearLayout row4;
+        ArrayList<TextView> textviewList;
 
         public PlaceholderFragment() {
         }
@@ -87,37 +91,106 @@ public class FirstStageActivity extends ActionBarActivity {
 
             String sentence = IntroActivity.oriSentences.get(0);
             ArrayList<Pair<String, String>> pairs = IntroActivity.sentencesMap.get(0);
-            String words[] = sentence.split(" ");
-            int count = 0;
+            textviewList = new ArrayList<TextView>();
 
-            for(int i = 0; i < words.length; i++){
-                if(count + words[i].length() < 33){
-                    row1.addView(generateTextView(words[i]));
-                    row1.addView(generateTextView(" "));
-                    count += words[i].length() + 1;
-                }else if(count + words[i].length() < 66){
-                    row2.addView(generateTextView(words[i]));
-                    row2.addView(generateTextView(" "));
-                    count += words[i].length() + 1;
-                }else if(count + words[i].length() < 99){
-                    row3.addView(generateTextView(words[i]));
-                    row3.addView(generateTextView(" "));
-                    count += words[i].length() + 1;
-                }else{
-                    row4.addView(generateTextView(words[i]));
-                    row4.addView(generateTextView(" "));
-                    count += words[i].length() + 1;
+            int count = 0;
+            for(int j = 0; j < pairs.size(); j++){
+                Pair<String, String> p = pairs.get(j);
+                TextView tv, spacetv;
+                String str = p.first;
+                String words[] = str.split(" ");
+
+                for(int i = 0; i < words.length; i++){
+                    tv = generateTextView(words[i], Integer.toString(j));
+                    spacetv = generateTextView(" ", Integer.toString(j));
+                    if(count + words[i].length() < 33){
+                        row1.addView(tv);
+                        row1.addView(spacetv);
+                        count += words[i].length() + 1;
+                    }else if(count + words[i].length() < 66){
+                        row2.addView(tv);
+                        row2.addView(spacetv);
+                        count += words[i].length() + 1;
+                    }else if(count + words[i].length() < 99){
+                        row3.addView(tv);
+                        row3.addView(spacetv);
+                        count += words[i].length() + 1;
+                    }else{
+                        row4.addView(tv);
+                        row4.addView(spacetv);
+                        count += words[i].length() + 1;
+                    }
+                    textviewList.add(tv);
+                    textviewList.add(spacetv);
                 }
             }
 
             return rootView;
         }
 
-        private TextView generateTextView(String word){
+        private TextView generateTextView(String word, String group){
             TextView tv = new TextView(getActivity());
             tv.setText(word);
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            tv.setTag(R.id.group, group);
+            tv.setTag(R.id.highlight, Boolean.FALSE);
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String tag = (String) view.getTag(R.id.group);
+                    Boolean highlight = (Boolean) view.getTag(R.id.highlight);
+                    for (TextView tv : textviewList) {
+                        if ((String) tv.getTag(R.id.group) == tag) {
+                            if (!highlight) {
+                                tv.setBackgroundColor(getResources().getColor(R.color.yellow));
+                                tv.setTag(R.id.highlight, Boolean.TRUE);
+                            } else {
+                                tv.setBackgroundColor(Color.TRANSPARENT);
+                                tv.setTag(R.id.highlight, Boolean.FALSE);
+                            }
+                        }
+                    }
+                }
+            });
             return tv;
+        }
+
+        private void generateSentence(int k){
+            String sentence = IntroActivity.oriSentences.get(k);
+            ArrayList<Pair<String, String>> pairs = IntroActivity.sentencesMap.get(k);
+            textviewList = new ArrayList<TextView>();
+
+            int count = 0;
+            for(int j = 0; j < pairs.size(); j++){
+                Pair<String, String> p = pairs.get(j);
+                TextView tv, spacetv;
+                String str = p.first;
+                String words[] = str.split(" ");
+
+                for(int i = 0; i < words.length; i++){
+                    tv = generateTextView(words[i], Integer.toString(j));
+                    spacetv = generateTextView(" ", Integer.toString(j));
+                    if(count + words[i].length() < 33){
+                        row1.addView(tv);
+                        row1.addView(spacetv);
+                        count += words[i].length() + 1;
+                    }else if(count + words[i].length() < 66){
+                        row2.addView(tv);
+                        row2.addView(spacetv);
+                        count += words[i].length() + 1;
+                    }else if(count + words[i].length() < 99){
+                        row3.addView(tv);
+                        row3.addView(spacetv);
+                        count += words[i].length() + 1;
+                    }else{
+                        row4.addView(tv);
+                        row4.addView(spacetv);
+                        count += words[i].length() + 1;
+                    }
+                    textviewList.add(tv);
+                    textviewList.add(spacetv);
+                }
+            }
         }
     }
 
