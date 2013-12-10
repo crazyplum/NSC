@@ -38,10 +38,9 @@ public class FirstStageActivity extends ActionBarActivity {
                     .commit();
         }
 
-        current_state = 0;
         Intent intent = getIntent();
         testcase = intent.getIntExtra("testcase", -1);
-
+        current_state = intent.getIntExtra("current_state", -1);
     }
 
 
@@ -75,6 +74,7 @@ public class FirstStageActivity extends ActionBarActivity {
         LinearLayout row3;
         LinearLayout row4;
         ArrayList<TextView> textviewList;
+        int index = 0;
 
         public PlaceholderFragment() {
         }
@@ -89,41 +89,7 @@ public class FirstStageActivity extends ActionBarActivity {
             row3 = (LinearLayout) rootView.findViewById(R.id.row3);
             row4 = (LinearLayout) rootView.findViewById(R.id.row4);
 
-            String sentence = IntroActivity.oriSentences.get(0);
-            ArrayList<Pair<String, String>> pairs = IntroActivity.sentencesMap.get(0);
-            textviewList = new ArrayList<TextView>();
-
-            int count = 0;
-            for(int j = 0; j < pairs.size(); j++){
-                Pair<String, String> p = pairs.get(j);
-                TextView tv, spacetv;
-                String str = p.first;
-                String words[] = str.split(" ");
-
-                for(int i = 0; i < words.length; i++){
-                    tv = generateTextView(words[i], Integer.toString(j));
-                    spacetv = generateTextView(" ", Integer.toString(j));
-                    if(count + words[i].length() < 33){
-                        row1.addView(tv);
-                        row1.addView(spacetv);
-                        count += words[i].length() + 1;
-                    }else if(count + words[i].length() < 66){
-                        row2.addView(tv);
-                        row2.addView(spacetv);
-                        count += words[i].length() + 1;
-                    }else if(count + words[i].length() < 99){
-                        row3.addView(tv);
-                        row3.addView(spacetv);
-                        count += words[i].length() + 1;
-                    }else{
-                        row4.addView(tv);
-                        row4.addView(spacetv);
-                        count += words[i].length() + 1;
-                    }
-                    textviewList.add(tv);
-                    textviewList.add(spacetv);
-                }
-            }
+            generateSentence();
 
             return rootView;
         }

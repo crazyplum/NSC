@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ScrollView;
 
 import com.plum.mthighlight.R;
 
@@ -25,8 +26,9 @@ public class StartActivity extends Activity{
 
         mButtonlist = (LinearLayout) findViewById(R.id.buttonlist);
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        mButtonlist.addView(createButton(0, this), params);
-
+        for(int i = 0; i < 18; i++){
+            mButtonlist.addView(createButton(i, this), params);
+        }
     }
 
     private Button createButton(final int i, final Context cxt){
