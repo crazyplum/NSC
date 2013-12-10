@@ -36,6 +36,7 @@ public class Tracker {
         JSONObject object = new JSONObject();
         try {
             object.put("type", "start");
+            object.put("activity", activity.getComponentName());
             object.put("testcase", intent.getIntExtra("testcase", -1));
             object.put("time", new Date().getTime());
         } catch (JSONException e) {
