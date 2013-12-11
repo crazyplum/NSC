@@ -11,31 +11,109 @@
     <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/ori_sentence"
-            android:textColor="@android:color/black"
-            android:textStyle="normal"
-            android:textSize="25sp"
-            android:gravity="center"
-            android:text="@string/dummy_content"
-            />
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="50sp"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/tran_sentence"
-            android:textColor="@android:color/black"
-            android:textStyle="normal"
-            android:textSize="25sp"
-            android:gravity="center"
-            android:text="@string/dummy_content"
-         />
+            <LinearLayout
+                android:id="@+id/orow1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5sp"
+                >
 
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/orow2"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5sp"
+                >
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/orow3"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5sp"
+                >
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/orow4"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5sp"
+                >
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/orow5"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5sp"
+                >
+
+            </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:id="@+id/trow1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5sp"
+                >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/trow2"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5sp"
+                >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/trow3"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5sp"
+                >
+
+            </LinearLayout>
+         </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

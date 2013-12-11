@@ -38,7 +38,7 @@ public class FirstStageActivity extends ActionBarActivity {
         Intent intent = getIntent();
         testcase = intent.getIntExtra("testcase", -1);
         current_state = intent.getIntExtra("current_state", -1);
-        mFragment = new PlaceholderFragment(testcase);
+        mFragment = new PlaceholderFragment(testcase, current_state);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -65,7 +65,21 @@ public class FirstStageActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.okay:
-                mFragment.getNewSentence();
+                if(mFragment.index < 2){
+                    mFragment.getNewSentence();
+                }else{
+                    if(current_state < 2){
+                        Intent intent = new Intent();
+                        intent.setClass(this, TestConditionOrder.TESTCASE.get(testcase % 6).get(current_state+1));
+                        intent.putExtra("testcase", testcase);
+                        intent.putExtra("current_state", current_state + 1);
+                        startActivity(intent);
+                    }else{
+                        Intent intent = new Intent();
+                        intent.setClass(this, EndActivity.class);
+                        startActivity(intent);
+                    }
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -86,10 +100,13 @@ public class FirstStageActivity extends ActionBarActivity {
         ArrayList<TextView> textviewList;
         int index;
         int testcase;
+        int current_state;
 
-        public PlaceholderFragment(int t) {
+        public PlaceholderFragment(int t, int c) {
             testcase = t;
+            current_state = c;
             index = 0;
+            Log.d("activity first", Integer.toString(t) + " " + Integer.toString(c));
         }
 
         @Override
@@ -104,7 +121,7 @@ public class FirstStageActivity extends ActionBarActivity {
             row5 = (LinearLayout) rootView.findViewById(R.id.row5);
             row6 = (LinearLayout) rootView.findViewById(R.id.row6);
 
-            generateSentence(TestConditionOrder.ORDER.get(testcase)[index + (testcase%6)*3]);
+            generateSentence(TestConditionOrder.ORDER.get(testcase)[index + current_state*3]);
 
             return rootView;
         }
@@ -206,7 +223,7 @@ public class FirstStageActivity extends ActionBarActivity {
             row4.removeAllViews();
             row5.removeAllViews();
             row6.removeAllViews();
-            generateSentence(TestConditionOrder.ORDER.get(testcase)[index + (testcase%6)*3]);
+            generateSentence(TestConditionOrder.ORDER.get(testcase)[index + current_state*3]);
         }
     }
 

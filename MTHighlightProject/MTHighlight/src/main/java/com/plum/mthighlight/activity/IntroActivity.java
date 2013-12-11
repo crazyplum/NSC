@@ -49,7 +49,7 @@ public class IntroActivity extends Activity{
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent();
-                    intent.setClass(IntroActivity.this, TestConditionOrder.TESTCASE.get(testcase).get(0));
+                    intent.setClass(IntroActivity.this, TestConditionOrder.TESTCASE.get(testcase % 6).get(0));
                     intent.putExtra("testcase", testcase);
                     intent.putExtra("current_state", 0);
                     IntroActivity.this.startActivity(intent);

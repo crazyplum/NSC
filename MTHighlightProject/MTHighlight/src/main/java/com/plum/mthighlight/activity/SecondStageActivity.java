@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class SecondStageActivity extends ActionBarActivity {
         testcase = intent.getIntExtra("testcase", -1);
         current_state = intent.getIntExtra("current_state", -1);
 
-        mFragment = new PlaceholderFragment(testcase);
+        mFragment = new PlaceholderFragment(testcase, current_state);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, mFragment)
@@ -68,7 +69,21 @@ public class SecondStageActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.okay:
-                mFragment.getNewSentence();
+                if(mFragment.index < 2){
+                    mFragment.getNewSentence();
+                }else{
+                    if(current_state < 2){
+                        Intent intent = new Intent();
+                        intent.setClass(this, TestConditionOrder.TESTCASE.get(testcase % 6).get(current_state+1));
+                        intent.putExtra("testcase", testcase);
+                        intent.putExtra("current_state", current_state + 1);
+                        startActivity(intent);
+                    }else{
+                        Intent intent = new Intent();
+                        intent.setClass(this, EndActivity.class);
+                        startActivity(intent);
+                    }
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -86,10 +101,13 @@ public class SecondStageActivity extends ActionBarActivity {
         ArrayList<TextView> textviewList;
         int index;
         int testcase;
+        int current_state;
 
-        public PlaceholderFragment(int t) {
+        public PlaceholderFragment(int t, int c) {
             testcase = t;
+            current_state = c;
             index = 0;
+            Log.d("activity second", Integer.toString(t) + " " + Integer.toString(c));
         }
 
         @Override
@@ -102,7 +120,7 @@ public class SecondStageActivity extends ActionBarActivity {
             row3 = (LinearLayout) rootView.findViewById(R.id.row3);
             row4 = (LinearLayout) rootView.findViewById(R.id.row4);
 
-            generateSentence(TestConditionOrder.ORDER.get(testcase)[index]);
+            generateSentence(TestConditionOrder.ORDER.get(testcase)[index + 3*current_state]);
 
             return rootView;
         }
@@ -171,7 +189,8 @@ public class SecondStageActivity extends ActionBarActivity {
             row2.removeAllViews();
             row3.removeAllViews();
             row4.removeAllViews();
-            generateSentence(TestConditionOrder.ORDER.get(testcase)[index]);
+            generateSentence(TestConditionOrder.ORDER.get(testcase)[index + 3*current_state]);
+            Log.d("activity second new", Integer.toString(index) + " " + Integer.toString(current_state));
         }
     }
 

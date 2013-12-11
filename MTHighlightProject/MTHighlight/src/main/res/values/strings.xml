@@ -7,6 +7,7 @@
     <string name="dummy_content">dummy content</string>
     <string name="okay">OK</string>
     <string name="intro">在接下來的測試當中，你將會遇到英文句子以及中文句子，還有兩種語言的句子同時出現的情況，請根據你的判斷，圈選出你認為是關鍵字的單字（最多五個）。\n\n\n完成後，請點擊右上角的OK鍵，進入下一題。\n\n\n若有問題，請隨時和我們詢問！！</string>
+    <string name="end">非常謝謝你！\n\n請直接把手機交給我們，到對面的842教室填寫基本資料以及回饋，並拿取小禮物 : )</string>
     <item type="id" name="group"></item>
     <item type="id" name="highlight"></item>
 </resources>
