@@ -102,7 +102,7 @@ public class SecondStageActivity extends ActionBarActivity {
             row3 = (LinearLayout) rootView.findViewById(R.id.row3);
             row4 = (LinearLayout) rootView.findViewById(R.id.row4);
 
-            generateSentence(TestConditionOrder.ORDER.get(testcase)[index + (testcase%6)*3]);
+            generateSentence(TestConditionOrder.ORDER.get(testcase)[index]);
 
             return rootView;
         }
@@ -171,7 +171,7 @@ public class SecondStageActivity extends ActionBarActivity {
             row2.removeAllViews();
             row3.removeAllViews();
             row4.removeAllViews();
-            generateSentence(TestConditionOrder.ORDER.get(testcase)[index + (testcase%6)*3]);
+            generateSentence(TestConditionOrder.ORDER.get(testcase)[index]);
         }
     }
 

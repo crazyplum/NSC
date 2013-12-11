@@ -182,13 +182,16 @@ public class FirstStageActivity extends ActionBarActivity {
                 Pair<String, String> p = pairs.get(i);
                 String str = p.first;
                 String w[]  = str.split(" ");
-
+                Log.d("first w", str);
                 for(int j = 0; j < w.length; j++){
                     for(TextView t: textviewList){
                         String word = (String)t.getText();
-                        word = word.replaceAll("[^a-zA-z0-9]", "");
+                        word = word.replaceAll("[^a-zA-z0-9\']", "");
                         if(word.equals(w[j])){
-                            t.setTag(R.id.group, Integer.toString(i+1));
+                            if((String)t.getTag(R.id.group)=="0"){
+                                t.setTag(R.id.group, Integer.toString(i+1));
+                                break;
+                            }
                         }
                     }
                 }
